@@ -1,0 +1,5 @@
+launch.json
+settings.json
+*.pyc
+buffer.txt
+bundle.json
