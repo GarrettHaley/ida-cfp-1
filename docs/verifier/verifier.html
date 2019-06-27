@@ -1,0 +1,586 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.5.3" />
+<title>verifier..verifier API documentation</title>
+<meta name="description" content="Defines `Verifier` …" />
+<link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+<style>.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{font-weight:bold}#index h4 + ul{margin-bottom:.6em}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.name small{font-weight:normal}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase;cursor:pointer}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}.admonition{padding:.1em .5em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title"><code>verifier..verifier</code> module</h1>
+</header>
+<section id="section-intro">
+<p>Defines <a title="verifier..verifier.Verifier" href="#verifier..verifier.Verifier"><code>Verifier</code></a>.</p>
+<p>Instantiates the module-level logger with the appropriate naming
+convention.</p>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">&#34;&#34;&#34;
+Defines `Verifier`.
+
+Instantiates the module-level logger with the appropriate naming
+convention.
+&#34;&#34;&#34;
+
+import logging
+from abc import ABC
+from pathlib import Path
+
+from exception.exception import DirStatusError, \
+    BundleCreationError, NoFunctionsFoundError, \
+    FilePermissionsError, FileLocationError, \
+    ListDictConversionError
+
+LOGGER = logging.getLogger(__name__)
+
+
+class Verifier(ABC):
+    &#34;&#34;&#34;
+    Define the object responsible for performing checks on program state.
+
+    `Verifier` exists entirely as a collection of utility functions defined
+    as class static methods. Only in two different cases does the class
+    have a return value other than None; checking the dictionary functions
+    and comparing the list and dictionary.
+    &#34;&#34;&#34;
+
+    @staticmethod
+    def check_parsable(files: list) -&gt; None:
+        &#34;&#34;&#34;
+        Determine if a set of files have read permissions and name attributes.
+
+        `Argparser` generates a list of file IO wrappers based on what files
+        are specified on the command line, however the core attributes of
+        each file object are not properly verified. For completeness&#39;s sake
+        this function serves as a secondary check.
+
+        If any of the two checks do pass, execution cannot continue under any
+        circumstances.
+
+        :param files: list of argparser IO wrappers
+        :return: returns nothing
+        &#34;&#34;&#34;
+        for file_io in files:
+
+            # Files are only attempted to be opened as read only
+            if file_io.mode != &#39;r&#39;:
+                raise FilePermissionsError(&#34;File has no read permissions&#34;)
+
+            # Argparser traditionally prefills the name field
+            if not file_io.name:
+                raise FileLocationError(&#34;File has no name property&#34;)
+
+    @staticmethod
+    def check_num_ast_functions(nodes) -&gt; None:
+        &#34;&#34;&#34;
+        Count the number of functions found within a set of nodes or full AST.
+
+        Should a file be successfully pre-processed by clang and loaded as an
+        AST but contain no functions, something went horribly wrong.
+
+        :param nodes: list of function declaration nodes
+        :return: returns nothing
+        &#34;&#34;&#34;
+        count = 0
+
+        for node in nodes:
+            count = count + 1
+
+            # Each function definition node (from c_ast.NodeVisitor) contains
+            # specific properties, one of which being name. More info here at
+            # https://docs.python.org/3/library/ast.html
+            LOGGER.info(&#39;Function: %s&#39;, node.decl.name)
+
+        if not count:
+            raise NoFunctionsFoundError(&#34;No functions found in target file&#34;)
+
+    @staticmethod
+    def check_num_dict_functions(tmp_dict: dict) -&gt; bool:
+        &#34;&#34;&#34;
+        Checks the number of values stored in the dictionary.
+
+        Largely utilized as a flag for issuing warnings when the final
+        bundle is found to have no string: function pairs.
+
+        :param tmp_dict: master dictionary of unique strings: functions
+        :return bool(tmp_dict.values()): true if values exist, false otherwise
+        &#34;&#34;&#34;
+        return bool(tmp_dict.values())
+
+    @staticmethod
+    def check_dict_by_list(tmp_list: list, tmp_dict: dict) -&gt; list:
+        &#34;&#34;&#34;
+        Locate common denominators between tuple list and dictionary keys.
+
+        Before adding any tuple to the dictionary it is imperative that
+        the dictionary does not already contain that key.
+
+        :param tmp_list: list of tuples in the format (function, string)
+        :param tmp_dict: master dictionary of unique strings: functions
+        :return: list
+        &#34;&#34;&#34;
+        to_remove = []
+
+        for key in tmp_dict.keys():
+            for pair in tmp_list:
+
+                # Key must not already be in the list. If it is, appending
+                # it will create a duplicate in the to_remove list
+                if key == pair[1] and key not in to_remove:
+
+                    # Add the second item in the tuple: (function, string)
+                    to_remove.append(pair[1])
+
+        return to_remove
+
+    @staticmethod
+    def check_list_dict_conversion(tmp_list: list) -&gt; None:
+        &#34;&#34;&#34;
+        Check if the list of tuples can be converted to a custom dictionary.
+
+        Before swapping the tuples in the list and converting the unique
+        strings to represent the keys in the dictionary, there must be at
+        least one entry in the list.
+
+        :param tmp_list: list of tuples
+        :return: returns nothing
+        &#34;&#34;&#34;
+        try:
+            if not tmp_list:
+                raise ListDictConversionError()
+
+        except ListDictConversionError:
+            LOGGER.warning(&#34;Empty list when converting to final dictionary&#34;)
+
+    @staticmethod
+    def check_bundle_creation(out_path_dir: str, out_path: str) -&gt; None:
+        &#34;&#34;&#34;
+        Test out/ directory and bundle file creation.
+
+        :param out_path_dir: fully qualified path to the out/ directory
+        :param out_path: fully qualified path to the json bundle
+        :return: returns nothing
+        &#34;&#34;&#34;
+        out_dir = Path(out_path_dir)
+        out_file = Path(out_path)
+
+        if not out_dir.is_dir():
+            raise DirStatusError(&#34;Directory out/ is not valid&#34;)
+
+        if not out_file.is_file():
+            raise BundleCreationError(&#34;Bundle not created&#34;)</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="verifier..verifier.Verifier"><code class="flex name class">
+<span>class <span class="ident">Verifier</span></span>
+<span>(</span><span><small>ancestors:</small> abc.ABC)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Define the object responsible for performing checks on program state.</p>
+<p><a title="verifier..verifier.Verifier" href="#verifier..verifier.Verifier"><code>Verifier</code></a> exists entirely as a collection of utility functions defined
+as class static methods. Only in two different cases does the class
+have a return value other than None; checking the dictionary functions
+and comparing the list and dictionary.</p></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">class Verifier(ABC):
+    &#34;&#34;&#34;
+    Define the object responsible for performing checks on program state.
+
+    `Verifier` exists entirely as a collection of utility functions defined
+    as class static methods. Only in two different cases does the class
+    have a return value other than None; checking the dictionary functions
+    and comparing the list and dictionary.
+    &#34;&#34;&#34;
+
+    @staticmethod
+    def check_parsable(files: list) -&gt; None:
+        &#34;&#34;&#34;
+        Determine if a set of files have read permissions and name attributes.
+
+        `Argparser` generates a list of file IO wrappers based on what files
+        are specified on the command line, however the core attributes of
+        each file object are not properly verified. For completeness&#39;s sake
+        this function serves as a secondary check.
+
+        If any of the two checks do pass, execution cannot continue under any
+        circumstances.
+
+        :param files: list of argparser IO wrappers
+        :return: returns nothing
+        &#34;&#34;&#34;
+        for file_io in files:
+
+            # Files are only attempted to be opened as read only
+            if file_io.mode != &#39;r&#39;:
+                raise FilePermissionsError(&#34;File has no read permissions&#34;)
+
+            # Argparser traditionally prefills the name field
+            if not file_io.name:
+                raise FileLocationError(&#34;File has no name property&#34;)
+
+    @staticmethod
+    def check_num_ast_functions(nodes) -&gt; None:
+        &#34;&#34;&#34;
+        Count the number of functions found within a set of nodes or full AST.
+
+        Should a file be successfully pre-processed by clang and loaded as an
+        AST but contain no functions, something went horribly wrong.
+
+        :param nodes: list of function declaration nodes
+        :return: returns nothing
+        &#34;&#34;&#34;
+        count = 0
+
+        for node in nodes:
+            count = count + 1
+
+            # Each function definition node (from c_ast.NodeVisitor) contains
+            # specific properties, one of which being name. More info here at
+            # https://docs.python.org/3/library/ast.html
+            LOGGER.info(&#39;Function: %s&#39;, node.decl.name)
+
+        if not count:
+            raise NoFunctionsFoundError(&#34;No functions found in target file&#34;)
+
+    @staticmethod
+    def check_num_dict_functions(tmp_dict: dict) -&gt; bool:
+        &#34;&#34;&#34;
+        Checks the number of values stored in the dictionary.
+
+        Largely utilized as a flag for issuing warnings when the final
+        bundle is found to have no string: function pairs.
+
+        :param tmp_dict: master dictionary of unique strings: functions
+        :return bool(tmp_dict.values()): true if values exist, false otherwise
+        &#34;&#34;&#34;
+        return bool(tmp_dict.values())
+
+    @staticmethod
+    def check_dict_by_list(tmp_list: list, tmp_dict: dict) -&gt; list:
+        &#34;&#34;&#34;
+        Locate common denominators between tuple list and dictionary keys.
+
+        Before adding any tuple to the dictionary it is imperative that
+        the dictionary does not already contain that key.
+
+        :param tmp_list: list of tuples in the format (function, string)
+        :param tmp_dict: master dictionary of unique strings: functions
+        :return: list
+        &#34;&#34;&#34;
+        to_remove = []
+
+        for key in tmp_dict.keys():
+            for pair in tmp_list:
+
+                # Key must not already be in the list. If it is, appending
+                # it will create a duplicate in the to_remove list
+                if key == pair[1] and key not in to_remove:
+
+                    # Add the second item in the tuple: (function, string)
+                    to_remove.append(pair[1])
+
+        return to_remove
+
+    @staticmethod
+    def check_list_dict_conversion(tmp_list: list) -&gt; None:
+        &#34;&#34;&#34;
+        Check if the list of tuples can be converted to a custom dictionary.
+
+        Before swapping the tuples in the list and converting the unique
+        strings to represent the keys in the dictionary, there must be at
+        least one entry in the list.
+
+        :param tmp_list: list of tuples
+        :return: returns nothing
+        &#34;&#34;&#34;
+        try:
+            if not tmp_list:
+                raise ListDictConversionError()
+
+        except ListDictConversionError:
+            LOGGER.warning(&#34;Empty list when converting to final dictionary&#34;)
+
+    @staticmethod
+    def check_bundle_creation(out_path_dir: str, out_path: str) -&gt; None:
+        &#34;&#34;&#34;
+        Test out/ directory and bundle file creation.
+
+        :param out_path_dir: fully qualified path to the out/ directory
+        :param out_path: fully qualified path to the json bundle
+        :return: returns nothing
+        &#34;&#34;&#34;
+        out_dir = Path(out_path_dir)
+        out_file = Path(out_path)
+
+        if not out_dir.is_dir():
+            raise DirStatusError(&#34;Directory out/ is not valid&#34;)
+
+        if not out_file.is_file():
+            raise BundleCreationError(&#34;Bundle not created&#34;)</code></pre>
+</details>
+<h3>Static methods</h3>
+<dl>
+<dt id="verifier..verifier.Verifier.check_bundle_creation"><code class="name flex">
+<span>def <span class="ident">check_bundle_creation</span></span>(<span>out_path_dir, out_path)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Test out/ directory and bundle file creation.</p>
+<p>:param out_path_dir: fully qualified path to the out/ directory
+:param out_path: fully qualified path to the json bundle
+:return: returns nothing</p></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@staticmethod
+def check_bundle_creation(out_path_dir: str, out_path: str) -&gt; None:
+    &#34;&#34;&#34;
+    Test out/ directory and bundle file creation.
+
+    :param out_path_dir: fully qualified path to the out/ directory
+    :param out_path: fully qualified path to the json bundle
+    :return: returns nothing
+    &#34;&#34;&#34;
+    out_dir = Path(out_path_dir)
+    out_file = Path(out_path)
+
+    if not out_dir.is_dir():
+        raise DirStatusError(&#34;Directory out/ is not valid&#34;)
+
+    if not out_file.is_file():
+        raise BundleCreationError(&#34;Bundle not created&#34;)</code></pre>
+</details>
+</dd>
+<dt id="verifier..verifier.Verifier.check_dict_by_list"><code class="name flex">
+<span>def <span class="ident">check_dict_by_list</span></span>(<span>tmp_list, tmp_dict)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Locate common denominators between tuple list and dictionary keys.</p>
+<p>Before adding any tuple to the dictionary it is imperative that
+the dictionary does not already contain that key.</p>
+<p>:param tmp_list: list of tuples in the format (function, string)
+:param tmp_dict: master dictionary of unique strings: functions
+:return: list</p></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@staticmethod
+def check_dict_by_list(tmp_list: list, tmp_dict: dict) -&gt; list:
+    &#34;&#34;&#34;
+    Locate common denominators between tuple list and dictionary keys.
+
+    Before adding any tuple to the dictionary it is imperative that
+    the dictionary does not already contain that key.
+
+    :param tmp_list: list of tuples in the format (function, string)
+    :param tmp_dict: master dictionary of unique strings: functions
+    :return: list
+    &#34;&#34;&#34;
+    to_remove = []
+
+    for key in tmp_dict.keys():
+        for pair in tmp_list:
+
+            # Key must not already be in the list. If it is, appending
+            # it will create a duplicate in the to_remove list
+            if key == pair[1] and key not in to_remove:
+
+                # Add the second item in the tuple: (function, string)
+                to_remove.append(pair[1])
+
+    return to_remove</code></pre>
+</details>
+</dd>
+<dt id="verifier..verifier.Verifier.check_list_dict_conversion"><code class="name flex">
+<span>def <span class="ident">check_list_dict_conversion</span></span>(<span>tmp_list)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Check if the list of tuples can be converted to a custom dictionary.</p>
+<p>Before swapping the tuples in the list and converting the unique
+strings to represent the keys in the dictionary, there must be at
+least one entry in the list.</p>
+<p>:param tmp_list: list of tuples
+:return: returns nothing</p></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@staticmethod
+def check_list_dict_conversion(tmp_list: list) -&gt; None:
+    &#34;&#34;&#34;
+    Check if the list of tuples can be converted to a custom dictionary.
+
+    Before swapping the tuples in the list and converting the unique
+    strings to represent the keys in the dictionary, there must be at
+    least one entry in the list.
+
+    :param tmp_list: list of tuples
+    :return: returns nothing
+    &#34;&#34;&#34;
+    try:
+        if not tmp_list:
+            raise ListDictConversionError()
+
+    except ListDictConversionError:
+        LOGGER.warning(&#34;Empty list when converting to final dictionary&#34;)</code></pre>
+</details>
+</dd>
+<dt id="verifier..verifier.Verifier.check_num_ast_functions"><code class="name flex">
+<span>def <span class="ident">check_num_ast_functions</span></span>(<span>nodes)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Count the number of functions found within a set of nodes or full AST.</p>
+<p>Should a file be successfully pre-processed by clang and loaded as an
+AST but contain no functions, something went horribly wrong.</p>
+<p>:param nodes: list of function declaration nodes
+:return: returns nothing</p></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@staticmethod
+def check_num_ast_functions(nodes) -&gt; None:
+    &#34;&#34;&#34;
+    Count the number of functions found within a set of nodes or full AST.
+
+    Should a file be successfully pre-processed by clang and loaded as an
+    AST but contain no functions, something went horribly wrong.
+
+    :param nodes: list of function declaration nodes
+    :return: returns nothing
+    &#34;&#34;&#34;
+    count = 0
+
+    for node in nodes:
+        count = count + 1
+
+        # Each function definition node (from c_ast.NodeVisitor) contains
+        # specific properties, one of which being name. More info here at
+        # https://docs.python.org/3/library/ast.html
+        LOGGER.info(&#39;Function: %s&#39;, node.decl.name)
+
+    if not count:
+        raise NoFunctionsFoundError(&#34;No functions found in target file&#34;)</code></pre>
+</details>
+</dd>
+<dt id="verifier..verifier.Verifier.check_num_dict_functions"><code class="name flex">
+<span>def <span class="ident">check_num_dict_functions</span></span>(<span>tmp_dict)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Checks the number of values stored in the dictionary.</p>
+<p>Largely utilized as a flag for issuing warnings when the final
+bundle is found to have no string: function pairs.</p>
+<p>:param tmp_dict: master dictionary of unique strings: functions
+:return bool(tmp_dict.values()): true if values exist, false otherwise</p></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@staticmethod
+def check_num_dict_functions(tmp_dict: dict) -&gt; bool:
+    &#34;&#34;&#34;
+    Checks the number of values stored in the dictionary.
+
+    Largely utilized as a flag for issuing warnings when the final
+    bundle is found to have no string: function pairs.
+
+    :param tmp_dict: master dictionary of unique strings: functions
+    :return bool(tmp_dict.values()): true if values exist, false otherwise
+    &#34;&#34;&#34;
+    return bool(tmp_dict.values())</code></pre>
+</details>
+</dd>
+<dt id="verifier..verifier.Verifier.check_parsable"><code class="name flex">
+<span>def <span class="ident">check_parsable</span></span>(<span>files)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Determine if a set of files have read permissions and name attributes.</p>
+<p><code>Argparser</code> generates a list of file IO wrappers based on what files
+are specified on the command line, however the core attributes of
+each file object are not properly verified. For completeness's sake
+this function serves as a secondary check.</p>
+<p>If any of the two checks do pass, execution cannot continue under any
+circumstances.</p>
+<p>:param files: list of argparser IO wrappers
+:return: returns nothing</p></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@staticmethod
+def check_parsable(files: list) -&gt; None:
+    &#34;&#34;&#34;
+    Determine if a set of files have read permissions and name attributes.
+
+    `Argparser` generates a list of file IO wrappers based on what files
+    are specified on the command line, however the core attributes of
+    each file object are not properly verified. For completeness&#39;s sake
+    this function serves as a secondary check.
+
+    If any of the two checks do pass, execution cannot continue under any
+    circumstances.
+
+    :param files: list of argparser IO wrappers
+    :return: returns nothing
+    &#34;&#34;&#34;
+    for file_io in files:
+
+        # Files are only attempted to be opened as read only
+        if file_io.mode != &#39;r&#39;:
+            raise FilePermissionsError(&#34;File has no read permissions&#34;)
+
+        # Argparser traditionally prefills the name field
+        if not file_io.name:
+            raise FileLocationError(&#34;File has no name property&#34;)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="verifier." href="index.html">verifier.</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="verifier..verifier.Verifier" href="#verifier..verifier.Verifier">Verifier</a></code></h4>
+<ul class="">
+<li><code><a title="verifier..verifier.Verifier.check_bundle_creation" href="#verifier..verifier.Verifier.check_bundle_creation">check_bundle_creation</a></code></li>
+<li><code><a title="verifier..verifier.Verifier.check_dict_by_list" href="#verifier..verifier.Verifier.check_dict_by_list">check_dict_by_list</a></code></li>
+<li><code><a title="verifier..verifier.Verifier.check_list_dict_conversion" href="#verifier..verifier.Verifier.check_list_dict_conversion">check_list_dict_conversion</a></code></li>
+<li><code><a title="verifier..verifier.Verifier.check_num_ast_functions" href="#verifier..verifier.Verifier.check_num_ast_functions">check_num_ast_functions</a></code></li>
+<li><code><a title="verifier..verifier.Verifier.check_num_dict_functions" href="#verifier..verifier.Verifier.check_num_dict_functions">check_num_dict_functions</a></code></li>
+<li><code><a title="verifier..verifier.Verifier.check_parsable" href="#verifier..verifier.Verifier.check_parsable">check_parsable</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.5.3</a>.</p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>

@@ -1,0 +1,555 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.5.3" />
+<title>interface..interface API documentation</title>
+<meta name="description" content="Defines `Interface` …" />
+<link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+<style>.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{font-weight:bold}#index h4 + ul{margin-bottom:.6em}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.name small{font-weight:normal}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase;cursor:pointer}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}.admonition{padding:.1em .5em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title"><code>interface..interface</code> module</h1>
+</header>
+<section id="section-intro">
+<p>Defines <a title="interface..interface.Interface" href="#interface..interface.Interface"><code>Interface</code></a>.</p>
+<p>Instantiates the module-level logger with the appropriate naming
+convention.</p>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">&#34;&#34;&#34;
+Defines `Interface`.
+
+Instantiates the module-level logger with the appropriate naming
+convention.
+&#34;&#34;&#34;
+
+import logging
+import json
+import os
+import platform
+from abc import ABC
+from pycparser import c_ast, parse_file
+
+from verifier.verifier import Verifier
+from exception.exception import NoneFilePathError
+
+LOGGER = logging.getLogger(__name__)
+
+
+class Interface(ABC):
+    &#34;&#34;&#34;
+    Define the object responsible for file I/O and `json` interaction.
+
+    `OUT_FILE` is the file name of the final &#34;bundle&#34; that is ultimately
+    dropped to disk under the out/ directory. If that file name needs to
+    be changed programmatically, this is the place to do it.
+
+    `OUT_DIR` is the directory in which the `OUT_FILE` is placed. This
+    class-variable exists as a convienient way for `Verifier` to test
+    directory structure validity.
+
+    `OUT_FILE_PATH` is the fully qualified path to the &#34;bundle&#34;.
+    &#34;&#34;&#34;
+
+    OUT_FILE = &#34;bundle.json&#34;
+    OUT_DIR = os.getcwd() + &#34;/out/&#34;
+    OUT_FILE_PATH = os.getcwd() + &#34;/out/&#34; + OUT_FILE
+
+    def __init__(self) -&gt; None:
+        &#34;&#34;&#34;
+        Initialize the `Interface` object.
+
+        `self.ast` contains the current AST for whichever file is
+        being processed at the time. On each subsequent file load,
+        the `self.ast` member variable is reset.
+
+        `self.json_data` contains the &#34;pretty-formatted&#34; json string
+        data that is eventually written to disk.
+
+        :return: returns nothing
+        &#34;&#34;&#34;
+        self.ast = None
+        self.json_data = None
+
+    def load_new_ast(self, file_path: str = &#34;&#34;) -&gt; c_ast.FileAST:
+        &#34;&#34;&#34;
+        Load a new abstract syntax tree (AST).
+
+        Check file path validity before selecting which type of clang
+        executable to use for PycParser&#39;s `parse_file`.
+
+        :param file_path: file to be parsed
+        :return self.ast: PycParser AST
+        &#34;&#34;&#34;
+        # PycParser requires a fully-qualified and valid file path
+        # for any file to be properly parsed, therfore if a None-type
+        # is encountered, immediately except
+        if not file_path:
+            raise NoneFilePathError(&#34;File path is not fully qualified&#34;)
+
+        # While the requirements of the project list LLVM and associated
+        # developer packages, these are sometimes differences between
+        # clang file extensions of Windows vs. Unix
+        clang_path = &#34;clang&#34;
+        if platform.system() == &#34;Windows&#34;:
+            clang_path = &#34;clang.exe&#34;
+
+        # Files of any size are supported, with the limits of execution
+        # falling only on available user hardware. 50 megabytes of C
+        # code in one file is a good place to draw the line
+        size_mb = os.path.getsize(file_path) &gt;&gt; 20
+        if size_mb &gt; 50:
+            LOGGER.warning(&#34;File size exceeds 50MB&#34;)
+
+        # PycParser offers a few different ways to generate ASTs but the
+        # following is by far the most clean. Clang is well developed
+        # as a c pre-processor and installed by default on OS X
+        self.ast = parse_file(file_path,
+                              use_cpp=True,
+                              cpp_path=clang_path,
+                              cpp_args=[&#39;-E&#39;, &#39;-Iutils/fake_libc_include&#39;])
+
+        return self.ast
+
+    def convert_dict_to_json(self, data: dict) -&gt; None:
+        &#34;&#34;&#34;
+        Convert dictionary to `json`-pretty-formatted string.
+
+        :param data: Master `Record` dictionary of string: function
+        :return: returns nothing
+        &#34;&#34;&#34;
+        # Call to dumps returns a sorted, and indented string, instead
+        # of the json object more common usage of dump. In this case,
+        # dumps needed to be used so any special escape slashes can
+        # be properly stripped
+        self.json_data = json.dumps(data, indent=4, sort_keys=True)
+
+        # Quick reformat of the member variable `json_data` to remove
+        # all &#34;\\&#34; and replace with &#34;\&#34;
+        self.process_out_data()
+
+        # If the conversion comes back with nothing or just {}, that is
+        # cause for notification but not error or warning. Some files
+        # will result in no unique strings being found
+        if not self.json_data:
+            LOGGER.warning(&#34;Empty bundle&#34;)
+
+    def process_out_data(self) -&gt; None:
+        &#34;&#34;&#34;
+        Strip string of double backslashes and replace with single.
+
+        Any double backslashes that were previously used to escape
+        special characters need to be completely stripped. If not,
+        the bundle dict keys will not contain the exact representation
+        of the strings that exist in the target file.
+
+        :return: returns nothing
+        &#34;&#34;&#34;
+        self.json_data = self.json_data.replace(&#34;\\\\&#34;, &#34;\\&#34;)
+
+    def drop_bundle_to_disk(self, data) -&gt; None:
+        &#34;&#34;&#34;
+        Write dictionary as json string to out/ directory.
+
+        :return: returns nothing
+        &#34;&#34;&#34;
+        # Opening files using &#34;w&#34; truncates existing content or creates
+        # a new file if it doesn&#39;t already exist. Save the old file
+        # somewhere else or under a different name if persistence
+        # between program runs is important
+        with open(self.OUT_FILE_PATH, &#34;w&#34;) as outfile:
+            outfile.write(data)
+
+        # Perform several checks on the validity of both out/ and on
+        # the bundle itself
+        Verifier.check_bundle_creation(self.OUT_DIR, self.OUT_FILE_PATH)</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="interface..interface.Interface"><code class="flex name class">
+<span>class <span class="ident">Interface</span></span>
+<span>(</span><span><small>ancestors:</small> abc.ABC)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Define the object responsible for file I/O and <code>json</code> interaction.</p>
+<p><code>OUT_FILE</code> is the file name of the final "bundle" that is ultimately
+dropped to disk under the out/ directory. If that file name needs to
+be changed programmatically, this is the place to do it.</p>
+<p><code>OUT_DIR</code> is the directory in which the <code>OUT_FILE</code> is placed. This
+class-variable exists as a convienient way for <code>Verifier</code> to test
+directory structure validity.</p>
+<p><code>OUT_FILE_PATH</code> is the fully qualified path to the "bundle".</p></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">class Interface(ABC):
+    &#34;&#34;&#34;
+    Define the object responsible for file I/O and `json` interaction.
+
+    `OUT_FILE` is the file name of the final &#34;bundle&#34; that is ultimately
+    dropped to disk under the out/ directory. If that file name needs to
+    be changed programmatically, this is the place to do it.
+
+    `OUT_DIR` is the directory in which the `OUT_FILE` is placed. This
+    class-variable exists as a convienient way for `Verifier` to test
+    directory structure validity.
+
+    `OUT_FILE_PATH` is the fully qualified path to the &#34;bundle&#34;.
+    &#34;&#34;&#34;
+
+    OUT_FILE = &#34;bundle.json&#34;
+    OUT_DIR = os.getcwd() + &#34;/out/&#34;
+    OUT_FILE_PATH = os.getcwd() + &#34;/out/&#34; + OUT_FILE
+
+    def __init__(self) -&gt; None:
+        &#34;&#34;&#34;
+        Initialize the `Interface` object.
+
+        `self.ast` contains the current AST for whichever file is
+        being processed at the time. On each subsequent file load,
+        the `self.ast` member variable is reset.
+
+        `self.json_data` contains the &#34;pretty-formatted&#34; json string
+        data that is eventually written to disk.
+
+        :return: returns nothing
+        &#34;&#34;&#34;
+        self.ast = None
+        self.json_data = None
+
+    def load_new_ast(self, file_path: str = &#34;&#34;) -&gt; c_ast.FileAST:
+        &#34;&#34;&#34;
+        Load a new abstract syntax tree (AST).
+
+        Check file path validity before selecting which type of clang
+        executable to use for PycParser&#39;s `parse_file`.
+
+        :param file_path: file to be parsed
+        :return self.ast: PycParser AST
+        &#34;&#34;&#34;
+        # PycParser requires a fully-qualified and valid file path
+        # for any file to be properly parsed, therfore if a None-type
+        # is encountered, immediately except
+        if not file_path:
+            raise NoneFilePathError(&#34;File path is not fully qualified&#34;)
+
+        # While the requirements of the project list LLVM and associated
+        # developer packages, these are sometimes differences between
+        # clang file extensions of Windows vs. Unix
+        clang_path = &#34;clang&#34;
+        if platform.system() == &#34;Windows&#34;:
+            clang_path = &#34;clang.exe&#34;
+
+        # Files of any size are supported, with the limits of execution
+        # falling only on available user hardware. 50 megabytes of C
+        # code in one file is a good place to draw the line
+        size_mb = os.path.getsize(file_path) &gt;&gt; 20
+        if size_mb &gt; 50:
+            LOGGER.warning(&#34;File size exceeds 50MB&#34;)
+
+        # PycParser offers a few different ways to generate ASTs but the
+        # following is by far the most clean. Clang is well developed
+        # as a c pre-processor and installed by default on OS X
+        self.ast = parse_file(file_path,
+                              use_cpp=True,
+                              cpp_path=clang_path,
+                              cpp_args=[&#39;-E&#39;, &#39;-Iutils/fake_libc_include&#39;])
+
+        return self.ast
+
+    def convert_dict_to_json(self, data: dict) -&gt; None:
+        &#34;&#34;&#34;
+        Convert dictionary to `json`-pretty-formatted string.
+
+        :param data: Master `Record` dictionary of string: function
+        :return: returns nothing
+        &#34;&#34;&#34;
+        # Call to dumps returns a sorted, and indented string, instead
+        # of the json object more common usage of dump. In this case,
+        # dumps needed to be used so any special escape slashes can
+        # be properly stripped
+        self.json_data = json.dumps(data, indent=4, sort_keys=True)
+
+        # Quick reformat of the member variable `json_data` to remove
+        # all &#34;\\&#34; and replace with &#34;\&#34;
+        self.process_out_data()
+
+        # If the conversion comes back with nothing or just {}, that is
+        # cause for notification but not error or warning. Some files
+        # will result in no unique strings being found
+        if not self.json_data:
+            LOGGER.warning(&#34;Empty bundle&#34;)
+
+    def process_out_data(self) -&gt; None:
+        &#34;&#34;&#34;
+        Strip string of double backslashes and replace with single.
+
+        Any double backslashes that were previously used to escape
+        special characters need to be completely stripped. If not,
+        the bundle dict keys will not contain the exact representation
+        of the strings that exist in the target file.
+
+        :return: returns nothing
+        &#34;&#34;&#34;
+        self.json_data = self.json_data.replace(&#34;\\\\&#34;, &#34;\\&#34;)
+
+    def drop_bundle_to_disk(self, data) -&gt; None:
+        &#34;&#34;&#34;
+        Write dictionary as json string to out/ directory.
+
+        :return: returns nothing
+        &#34;&#34;&#34;
+        # Opening files using &#34;w&#34; truncates existing content or creates
+        # a new file if it doesn&#39;t already exist. Save the old file
+        # somewhere else or under a different name if persistence
+        # between program runs is important
+        with open(self.OUT_FILE_PATH, &#34;w&#34;) as outfile:
+            outfile.write(data)
+
+        # Perform several checks on the validity of both out/ and on
+        # the bundle itself
+        Verifier.check_bundle_creation(self.OUT_DIR, self.OUT_FILE_PATH)</code></pre>
+</details>
+<h3>Class variables</h3>
+<dl>
+<dt id="interface..interface.Interface.OUT_DIR"><code class="name">var <span class="ident">OUT_DIR</span></code></dt>
+<dd>
+<section class="desc"></section>
+</dd>
+<dt id="interface..interface.Interface.OUT_FILE"><code class="name">var <span class="ident">OUT_FILE</span></code></dt>
+<dd>
+<section class="desc"></section>
+</dd>
+<dt id="interface..interface.Interface.OUT_FILE_PATH"><code class="name">var <span class="ident">OUT_FILE_PATH</span></code></dt>
+<dd>
+<section class="desc"></section>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="interface..interface.Interface.__init__"><code class="name flex">
+<span>def <span class="ident">__init__</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Initialize the <a title="interface..interface.Interface" href="#interface..interface.Interface"><code>Interface</code></a> object.</p>
+<p><code>self.ast</code> contains the current AST for whichever file is
+being processed at the time. On each subsequent file load,
+the <code>self.ast</code> member variable is reset.</p>
+<p><code>self.json_data</code> contains the "pretty-formatted" json string
+data that is eventually written to disk.</p>
+<p>:return: returns nothing</p></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">def __init__(self) -&gt; None:
+    &#34;&#34;&#34;
+    Initialize the `Interface` object.
+
+    `self.ast` contains the current AST for whichever file is
+    being processed at the time. On each subsequent file load,
+    the `self.ast` member variable is reset.
+
+    `self.json_data` contains the &#34;pretty-formatted&#34; json string
+    data that is eventually written to disk.
+
+    :return: returns nothing
+    &#34;&#34;&#34;
+    self.ast = None
+    self.json_data = None</code></pre>
+</details>
+</dd>
+<dt id="interface..interface.Interface.convert_dict_to_json"><code class="name flex">
+<span>def <span class="ident">convert_dict_to_json</span></span>(<span>self, data)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Convert dictionary to <code>json</code>-pretty-formatted string.</p>
+<p>:param data: Master <code>Record</code> dictionary of string: function
+:return: returns nothing</p></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">def convert_dict_to_json(self, data: dict) -&gt; None:
+    &#34;&#34;&#34;
+    Convert dictionary to `json`-pretty-formatted string.
+
+    :param data: Master `Record` dictionary of string: function
+    :return: returns nothing
+    &#34;&#34;&#34;
+    # Call to dumps returns a sorted, and indented string, instead
+    # of the json object more common usage of dump. In this case,
+    # dumps needed to be used so any special escape slashes can
+    # be properly stripped
+    self.json_data = json.dumps(data, indent=4, sort_keys=True)
+
+    # Quick reformat of the member variable `json_data` to remove
+    # all &#34;\\&#34; and replace with &#34;\&#34;
+    self.process_out_data()
+
+    # If the conversion comes back with nothing or just {}, that is
+    # cause for notification but not error or warning. Some files
+    # will result in no unique strings being found
+    if not self.json_data:
+        LOGGER.warning(&#34;Empty bundle&#34;)</code></pre>
+</details>
+</dd>
+<dt id="interface..interface.Interface.drop_bundle_to_disk"><code class="name flex">
+<span>def <span class="ident">drop_bundle_to_disk</span></span>(<span>self, data)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Write dictionary as json string to out/ directory.</p>
+<p>:return: returns nothing</p></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">def drop_bundle_to_disk(self, data) -&gt; None:
+    &#34;&#34;&#34;
+    Write dictionary as json string to out/ directory.
+
+    :return: returns nothing
+    &#34;&#34;&#34;
+    # Opening files using &#34;w&#34; truncates existing content or creates
+    # a new file if it doesn&#39;t already exist. Save the old file
+    # somewhere else or under a different name if persistence
+    # between program runs is important
+    with open(self.OUT_FILE_PATH, &#34;w&#34;) as outfile:
+        outfile.write(data)
+
+    # Perform several checks on the validity of both out/ and on
+    # the bundle itself
+    Verifier.check_bundle_creation(self.OUT_DIR, self.OUT_FILE_PATH)</code></pre>
+</details>
+</dd>
+<dt id="interface..interface.Interface.load_new_ast"><code class="name flex">
+<span>def <span class="ident">load_new_ast</span></span>(<span>self, file_path=&#39;&#39;)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Load a new abstract syntax tree (AST).</p>
+<p>Check file path validity before selecting which type of clang
+executable to use for PycParser's <code>parse_file</code>.</p>
+<p>:param file_path: file to be parsed
+:return self.ast: PycParser AST</p></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">def load_new_ast(self, file_path: str = &#34;&#34;) -&gt; c_ast.FileAST:
+    &#34;&#34;&#34;
+    Load a new abstract syntax tree (AST).
+
+    Check file path validity before selecting which type of clang
+    executable to use for PycParser&#39;s `parse_file`.
+
+    :param file_path: file to be parsed
+    :return self.ast: PycParser AST
+    &#34;&#34;&#34;
+    # PycParser requires a fully-qualified and valid file path
+    # for any file to be properly parsed, therfore if a None-type
+    # is encountered, immediately except
+    if not file_path:
+        raise NoneFilePathError(&#34;File path is not fully qualified&#34;)
+
+    # While the requirements of the project list LLVM and associated
+    # developer packages, these are sometimes differences between
+    # clang file extensions of Windows vs. Unix
+    clang_path = &#34;clang&#34;
+    if platform.system() == &#34;Windows&#34;:
+        clang_path = &#34;clang.exe&#34;
+
+    # Files of any size are supported, with the limits of execution
+    # falling only on available user hardware. 50 megabytes of C
+    # code in one file is a good place to draw the line
+    size_mb = os.path.getsize(file_path) &gt;&gt; 20
+    if size_mb &gt; 50:
+        LOGGER.warning(&#34;File size exceeds 50MB&#34;)
+
+    # PycParser offers a few different ways to generate ASTs but the
+    # following is by far the most clean. Clang is well developed
+    # as a c pre-processor and installed by default on OS X
+    self.ast = parse_file(file_path,
+                          use_cpp=True,
+                          cpp_path=clang_path,
+                          cpp_args=[&#39;-E&#39;, &#39;-Iutils/fake_libc_include&#39;])
+
+    return self.ast</code></pre>
+</details>
+</dd>
+<dt id="interface..interface.Interface.process_out_data"><code class="name flex">
+<span>def <span class="ident">process_out_data</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Strip string of double backslashes and replace with single.</p>
+<p>Any double backslashes that were previously used to escape
+special characters need to be completely stripped. If not,
+the bundle dict keys will not contain the exact representation
+of the strings that exist in the target file.</p>
+<p>:return: returns nothing</p></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">def process_out_data(self) -&gt; None:
+    &#34;&#34;&#34;
+    Strip string of double backslashes and replace with single.
+
+    Any double backslashes that were previously used to escape
+    special characters need to be completely stripped. If not,
+    the bundle dict keys will not contain the exact representation
+    of the strings that exist in the target file.
+
+    :return: returns nothing
+    &#34;&#34;&#34;
+    self.json_data = self.json_data.replace(&#34;\\\\&#34;, &#34;\\&#34;)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="interface." href="index.html">interface.</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="interface..interface.Interface" href="#interface..interface.Interface">Interface</a></code></h4>
+<ul class="">
+<li><code><a title="interface..interface.Interface.OUT_DIR" href="#interface..interface.Interface.OUT_DIR">OUT_DIR</a></code></li>
+<li><code><a title="interface..interface.Interface.OUT_FILE" href="#interface..interface.Interface.OUT_FILE">OUT_FILE</a></code></li>
+<li><code><a title="interface..interface.Interface.OUT_FILE_PATH" href="#interface..interface.Interface.OUT_FILE_PATH">OUT_FILE_PATH</a></code></li>
+<li><code><a title="interface..interface.Interface.__init__" href="#interface..interface.Interface.__init__">__init__</a></code></li>
+<li><code><a title="interface..interface.Interface.convert_dict_to_json" href="#interface..interface.Interface.convert_dict_to_json">convert_dict_to_json</a></code></li>
+<li><code><a title="interface..interface.Interface.drop_bundle_to_disk" href="#interface..interface.Interface.drop_bundle_to_disk">drop_bundle_to_disk</a></code></li>
+<li><code><a title="interface..interface.Interface.load_new_ast" href="#interface..interface.Interface.load_new_ast">load_new_ast</a></code></li>
+<li><code><a title="interface..interface.Interface.process_out_data" href="#interface..interface.Interface.process_out_data">process_out_data</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.5.3</a>.</p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>

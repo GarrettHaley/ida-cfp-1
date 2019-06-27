@@ -1,0 +1,569 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.5.3" />
+<title>record..record API documentation</title>
+<meta name="description" content="Defines `Record` …" />
+<link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+<style>.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{font-weight:bold}#index h4 + ul{margin-bottom:.6em}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.name small{font-weight:normal}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase;cursor:pointer}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}.admonition{padding:.1em .5em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title"><code>record..record</code> module</h1>
+</header>
+<section id="section-intro">
+<p>Defines <a title="record..record.Record" href="#record..record.Record"><code>Record</code></a>.</p>
+<p>Instantiates the module-level logger with the appropriate naming
+convention.</p>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">&#34;&#34;&#34;
+Defines `Record`.
+
+Instantiates the module-level logger with the appropriate naming
+convention.
+&#34;&#34;&#34;
+
+import logging
+import operator
+from abc import ABC
+
+from verifier.verifier import Verifier
+from exception.exception import NoUniqueStringsError
+
+LOGGER = logging.getLogger(__name__)
+
+
+class Record(ABC):
+    &#34;&#34;&#34;
+    Define the object responsible for maintaining state across modules.
+
+    The two most important components of `Record` are the dictionary of
+    unique strings and the functions which use them, along with the
+    list of tuples which contains every string and function found in
+    every AST.
+
+    `Record` largely exists as a way to interact with specific state across
+    six different independent modules. Granted, there are other ways of
+    solving this problem however many of them require excessive parameter
+    management and that wasn&#39;t something this project could support.
+
+    Because this object is interfaced with on so many different levels, all
+    of the methods are decorated as @classmethods.
+    &#34;&#34;&#34;
+
+    # The str_func_dict is responsible for maintaining the master record
+    # of all truly unique strings and the functions they are used within.
+    # To be added to this dictionary candidancy must be first properly
+    # adjudicated.
+
+    # While dictionaries cannot be sorted, the list of tuples is sorted by
+    # file and then alphabetically by string
+    str_func_dict = {}
+
+    # The tpl_list is a list of tuples containing all of the strings and
+    # associated functions for a given C99 standard file. Regardless of
+    # the content, uniqueness, or function-relevancy, all strings are
+    # added. After a single file has finished its processing, this list is
+    # returned to the below state.
+
+    # Strings are paired with the functions they are used within using
+    # tuples, like the following:
+    # [(&#34;my_function&#34;, &#34;myString&#34;), (&#34;func2&#34;, &#34;str2&#34;)]
+    tpl_list = []
+
+    @classmethod
+    def integrate_list_to_dict(cls) -&gt; None:
+        &#34;&#34;&#34;
+        Integrate the `Record` list of tuples into the `Record` dictionary.
+
+        To prepare the list and associated tuples for addition into the 
+        `Record` dictionary there are two steps that must be taken. The first
+        is to remove all non-unique tuples from the list, this means all tuples
+        that have a common string (function: string) between themselves and
+        another tuple in the list. The second is to pre-sort the list by
+        function name because dictionaries cannot be sorted, they can only
+        preserved their insertion order.
+
+        Following the completion of those two steps, the sorted list will
+        contain only sorted tuples that are entirely unique. Then they can be
+        added to the dictionary.
+
+        :return: returns nothing
+        &#34;&#34;&#34;
+        cls.remove_non_unique_from_list()
+        cls.sort_tmp_list()
+        cls.add_unique_to_dict()
+
+    @classmethod
+    def remove_non_unique_from_list(cls) -&gt; None:
+        &#34;&#34;&#34;
+        Remove tuples that share non-unique strings from the `Record` list.
+
+        :return: returns nothing
+        &#34;&#34;&#34;
+        strings = []
+        to_remove = []
+
+        for item in cls.tpl_list:
+
+            # Capture only a list of the strings. Dealing with removal
+            # of tuples based just the list of tuples itself quickly
+            # becomes a nightmare
+            strings.append(item[1])
+
+        for string in strings:
+
+            # Computationally speaking, this for and if statement are
+            # O(n^2), which is less than ideal but necessary given the
+            # constraints
+            if strings.count(string) &gt; 1:
+                to_remove.append(string)
+
+        for removal in to_remove:
+
+            # There are other ways to remove tuples that match the second
+            # element but those approaches are far more verbose than
+            # the following list comprehension
+            cls.tpl_list = [i for i in cls.tpl_list if i[1] != removal]
+
+    @classmethod
+    def sort_tmp_list(cls) -&gt; None:
+        &#34;&#34;&#34;
+        Sort the `Record` list by function name.
+
+        :return: returns nothing
+        &#34;&#34;&#34;
+        # Sort the list of tuples by the first element (function name),
+        # in ascending order (the default of sort())
+        cls.tpl_list.sort(key=operator.itemgetter(0))
+
+    @classmethod
+    def add_unique_to_dict(cls) -&gt; None:
+        &#34;&#34;&#34;
+        Add all unique function: string tuples to the `Record` dictionary.
+
+        :return: returns nothing
+        &#34;&#34;&#34;
+        reverse = [(t[1], t[0]) for t in cls.tpl_list]
+
+        # Final confirmation that the list is not empty. If it is, then a
+        # warning is generated through the module-level logger
+        Verifier.check_list_dict_conversion(reverse)
+
+        # Inserting new elements through update is far cleaner than
+        # utilizing an index by key and setting each one individually
+        cls.str_func_dict.update(dict(reverse))
+
+        try:
+            if not Verifier.check_num_dict_functions(cls.str_func_dict):
+                raise NoUniqueStringsError()
+
+        except NoUniqueStringsError:
+            LOGGER.warning(&#34;No strings found in final dictionary&#34;)
+
+    @classmethod
+    def add_func_str_to_list(cls, new_func: str, new_string: str) -&gt; None:
+        &#34;&#34;&#34;
+        Add a new function: string tuple to the `Record` list.
+
+        :param new_func: new function name to add
+        :param new_string: new string constant to add
+        :return: returns nothing
+        &#34;&#34;&#34;
+        # Append to the end of the list. Order of tuples doesn&#39;t matter until
+        # it comes time to insert unique tuples into the `Record` dictionary
+        cls.tpl_list.append(tuple((new_func, new_string)))</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="record..record.Record"><code class="flex name class">
+<span>class <span class="ident">Record</span></span>
+<span>(</span><span><small>ancestors:</small> abc.ABC)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Define the object responsible for maintaining state across modules.</p>
+<p>The two most important components of <a title="record..record.Record" href="#record..record.Record"><code>Record</code></a> are the dictionary of
+unique strings and the functions which use them, along with the
+list of tuples which contains every string and function found in
+every AST.</p>
+<p><a title="record..record.Record" href="#record..record.Record"><code>Record</code></a> largely exists as a way to interact with specific state across
+six different independent modules. Granted, there are other ways of
+solving this problem however many of them require excessive parameter
+management and that wasn't something this project could support.</p>
+<p>Because this object is interfaced with on so many different levels, all
+of the methods are decorated as @classmethods.</p></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">class Record(ABC):
+    &#34;&#34;&#34;
+    Define the object responsible for maintaining state across modules.
+
+    The two most important components of `Record` are the dictionary of
+    unique strings and the functions which use them, along with the
+    list of tuples which contains every string and function found in
+    every AST.
+
+    `Record` largely exists as a way to interact with specific state across
+    six different independent modules. Granted, there are other ways of
+    solving this problem however many of them require excessive parameter
+    management and that wasn&#39;t something this project could support.
+
+    Because this object is interfaced with on so many different levels, all
+    of the methods are decorated as @classmethods.
+    &#34;&#34;&#34;
+
+    # The str_func_dict is responsible for maintaining the master record
+    # of all truly unique strings and the functions they are used within.
+    # To be added to this dictionary candidancy must be first properly
+    # adjudicated.
+
+    # While dictionaries cannot be sorted, the list of tuples is sorted by
+    # file and then alphabetically by string
+    str_func_dict = {}
+
+    # The tpl_list is a list of tuples containing all of the strings and
+    # associated functions for a given C99 standard file. Regardless of
+    # the content, uniqueness, or function-relevancy, all strings are
+    # added. After a single file has finished its processing, this list is
+    # returned to the below state.
+
+    # Strings are paired with the functions they are used within using
+    # tuples, like the following:
+    # [(&#34;my_function&#34;, &#34;myString&#34;), (&#34;func2&#34;, &#34;str2&#34;)]
+    tpl_list = []
+
+    @classmethod
+    def integrate_list_to_dict(cls) -&gt; None:
+        &#34;&#34;&#34;
+        Integrate the `Record` list of tuples into the `Record` dictionary.
+
+        To prepare the list and associated tuples for addition into the 
+        `Record` dictionary there are two steps that must be taken. The first
+        is to remove all non-unique tuples from the list, this means all tuples
+        that have a common string (function: string) between themselves and
+        another tuple in the list. The second is to pre-sort the list by
+        function name because dictionaries cannot be sorted, they can only
+        preserved their insertion order.
+
+        Following the completion of those two steps, the sorted list will
+        contain only sorted tuples that are entirely unique. Then they can be
+        added to the dictionary.
+
+        :return: returns nothing
+        &#34;&#34;&#34;
+        cls.remove_non_unique_from_list()
+        cls.sort_tmp_list()
+        cls.add_unique_to_dict()
+
+    @classmethod
+    def remove_non_unique_from_list(cls) -&gt; None:
+        &#34;&#34;&#34;
+        Remove tuples that share non-unique strings from the `Record` list.
+
+        :return: returns nothing
+        &#34;&#34;&#34;
+        strings = []
+        to_remove = []
+
+        for item in cls.tpl_list:
+
+            # Capture only a list of the strings. Dealing with removal
+            # of tuples based just the list of tuples itself quickly
+            # becomes a nightmare
+            strings.append(item[1])
+
+        for string in strings:
+
+            # Computationally speaking, this for and if statement are
+            # O(n^2), which is less than ideal but necessary given the
+            # constraints
+            if strings.count(string) &gt; 1:
+                to_remove.append(string)
+
+        for removal in to_remove:
+
+            # There are other ways to remove tuples that match the second
+            # element but those approaches are far more verbose than
+            # the following list comprehension
+            cls.tpl_list = [i for i in cls.tpl_list if i[1] != removal]
+
+    @classmethod
+    def sort_tmp_list(cls) -&gt; None:
+        &#34;&#34;&#34;
+        Sort the `Record` list by function name.
+
+        :return: returns nothing
+        &#34;&#34;&#34;
+        # Sort the list of tuples by the first element (function name),
+        # in ascending order (the default of sort())
+        cls.tpl_list.sort(key=operator.itemgetter(0))
+
+    @classmethod
+    def add_unique_to_dict(cls) -&gt; None:
+        &#34;&#34;&#34;
+        Add all unique function: string tuples to the `Record` dictionary.
+
+        :return: returns nothing
+        &#34;&#34;&#34;
+        reverse = [(t[1], t[0]) for t in cls.tpl_list]
+
+        # Final confirmation that the list is not empty. If it is, then a
+        # warning is generated through the module-level logger
+        Verifier.check_list_dict_conversion(reverse)
+
+        # Inserting new elements through update is far cleaner than
+        # utilizing an index by key and setting each one individually
+        cls.str_func_dict.update(dict(reverse))
+
+        try:
+            if not Verifier.check_num_dict_functions(cls.str_func_dict):
+                raise NoUniqueStringsError()
+
+        except NoUniqueStringsError:
+            LOGGER.warning(&#34;No strings found in final dictionary&#34;)
+
+    @classmethod
+    def add_func_str_to_list(cls, new_func: str, new_string: str) -&gt; None:
+        &#34;&#34;&#34;
+        Add a new function: string tuple to the `Record` list.
+
+        :param new_func: new function name to add
+        :param new_string: new string constant to add
+        :return: returns nothing
+        &#34;&#34;&#34;
+        # Append to the end of the list. Order of tuples doesn&#39;t matter until
+        # it comes time to insert unique tuples into the `Record` dictionary
+        cls.tpl_list.append(tuple((new_func, new_string)))</code></pre>
+</details>
+<h3>Class variables</h3>
+<dl>
+<dt id="record..record.Record.str_func_dict"><code class="name">var <span class="ident">str_func_dict</span></code></dt>
+<dd>
+<section class="desc"></section>
+</dd>
+<dt id="record..record.Record.tpl_list"><code class="name">var <span class="ident">tpl_list</span></code></dt>
+<dd>
+<section class="desc"></section>
+</dd>
+</dl>
+<h3>Static methods</h3>
+<dl>
+<dt id="record..record.Record.add_func_str_to_list"><code class="name flex">
+<span>def <span class="ident">add_func_str_to_list</span></span>(<span>cls, new_func, new_string)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Add a new function: string tuple to the <a title="record..record.Record" href="#record..record.Record"><code>Record</code></a> list.</p>
+<p>:param new_func: new function name to add
+:param new_string: new string constant to add
+:return: returns nothing</p></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@classmethod
+def add_func_str_to_list(cls, new_func: str, new_string: str) -&gt; None:
+    &#34;&#34;&#34;
+    Add a new function: string tuple to the `Record` list.
+
+    :param new_func: new function name to add
+    :param new_string: new string constant to add
+    :return: returns nothing
+    &#34;&#34;&#34;
+    # Append to the end of the list. Order of tuples doesn&#39;t matter until
+    # it comes time to insert unique tuples into the `Record` dictionary
+    cls.tpl_list.append(tuple((new_func, new_string)))</code></pre>
+</details>
+</dd>
+<dt id="record..record.Record.add_unique_to_dict"><code class="name flex">
+<span>def <span class="ident">add_unique_to_dict</span></span>(<span>cls)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Add all unique function: string tuples to the <a title="record..record.Record" href="#record..record.Record"><code>Record</code></a> dictionary.</p>
+<p>:return: returns nothing</p></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@classmethod
+def add_unique_to_dict(cls) -&gt; None:
+    &#34;&#34;&#34;
+    Add all unique function: string tuples to the `Record` dictionary.
+
+    :return: returns nothing
+    &#34;&#34;&#34;
+    reverse = [(t[1], t[0]) for t in cls.tpl_list]
+
+    # Final confirmation that the list is not empty. If it is, then a
+    # warning is generated through the module-level logger
+    Verifier.check_list_dict_conversion(reverse)
+
+    # Inserting new elements through update is far cleaner than
+    # utilizing an index by key and setting each one individually
+    cls.str_func_dict.update(dict(reverse))
+
+    try:
+        if not Verifier.check_num_dict_functions(cls.str_func_dict):
+            raise NoUniqueStringsError()
+
+    except NoUniqueStringsError:
+        LOGGER.warning(&#34;No strings found in final dictionary&#34;)</code></pre>
+</details>
+</dd>
+<dt id="record..record.Record.integrate_list_to_dict"><code class="name flex">
+<span>def <span class="ident">integrate_list_to_dict</span></span>(<span>cls)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Integrate the <a title="record..record.Record" href="#record..record.Record"><code>Record</code></a> list of tuples into the <a title="record..record.Record" href="#record..record.Record"><code>Record</code></a> dictionary.</p>
+<p>To prepare the list and associated tuples for addition into the
+<a title="record..record.Record" href="#record..record.Record"><code>Record</code></a> dictionary there are two steps that must be taken. The first
+is to remove all non-unique tuples from the list, this means all tuples
+that have a common string (function: string) between themselves and
+another tuple in the list. The second is to pre-sort the list by
+function name because dictionaries cannot be sorted, they can only
+preserved their insertion order.</p>
+<p>Following the completion of those two steps, the sorted list will
+contain only sorted tuples that are entirely unique. Then they can be
+added to the dictionary.</p>
+<p>:return: returns nothing</p></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@classmethod
+def integrate_list_to_dict(cls) -&gt; None:
+    &#34;&#34;&#34;
+    Integrate the `Record` list of tuples into the `Record` dictionary.
+
+    To prepare the list and associated tuples for addition into the 
+    `Record` dictionary there are two steps that must be taken. The first
+    is to remove all non-unique tuples from the list, this means all tuples
+    that have a common string (function: string) between themselves and
+    another tuple in the list. The second is to pre-sort the list by
+    function name because dictionaries cannot be sorted, they can only
+    preserved their insertion order.
+
+    Following the completion of those two steps, the sorted list will
+    contain only sorted tuples that are entirely unique. Then they can be
+    added to the dictionary.
+
+    :return: returns nothing
+    &#34;&#34;&#34;
+    cls.remove_non_unique_from_list()
+    cls.sort_tmp_list()
+    cls.add_unique_to_dict()</code></pre>
+</details>
+</dd>
+<dt id="record..record.Record.remove_non_unique_from_list"><code class="name flex">
+<span>def <span class="ident">remove_non_unique_from_list</span></span>(<span>cls)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Remove tuples that share non-unique strings from the <a title="record..record.Record" href="#record..record.Record"><code>Record</code></a> list.</p>
+<p>:return: returns nothing</p></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@classmethod
+def remove_non_unique_from_list(cls) -&gt; None:
+    &#34;&#34;&#34;
+    Remove tuples that share non-unique strings from the `Record` list.
+
+    :return: returns nothing
+    &#34;&#34;&#34;
+    strings = []
+    to_remove = []
+
+    for item in cls.tpl_list:
+
+        # Capture only a list of the strings. Dealing with removal
+        # of tuples based just the list of tuples itself quickly
+        # becomes a nightmare
+        strings.append(item[1])
+
+    for string in strings:
+
+        # Computationally speaking, this for and if statement are
+        # O(n^2), which is less than ideal but necessary given the
+        # constraints
+        if strings.count(string) &gt; 1:
+            to_remove.append(string)
+
+    for removal in to_remove:
+
+        # There are other ways to remove tuples that match the second
+        # element but those approaches are far more verbose than
+        # the following list comprehension
+        cls.tpl_list = [i for i in cls.tpl_list if i[1] != removal]</code></pre>
+</details>
+</dd>
+<dt id="record..record.Record.sort_tmp_list"><code class="name flex">
+<span>def <span class="ident">sort_tmp_list</span></span>(<span>cls)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Sort the <a title="record..record.Record" href="#record..record.Record"><code>Record</code></a> list by function name.</p>
+<p>:return: returns nothing</p></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@classmethod
+def sort_tmp_list(cls) -&gt; None:
+    &#34;&#34;&#34;
+    Sort the `Record` list by function name.
+
+    :return: returns nothing
+    &#34;&#34;&#34;
+    # Sort the list of tuples by the first element (function name),
+    # in ascending order (the default of sort())
+    cls.tpl_list.sort(key=operator.itemgetter(0))</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="record." href="index.html">record.</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="record..record.Record" href="#record..record.Record">Record</a></code></h4>
+<ul class="">
+<li><code><a title="record..record.Record.add_func_str_to_list" href="#record..record.Record.add_func_str_to_list">add_func_str_to_list</a></code></li>
+<li><code><a title="record..record.Record.add_unique_to_dict" href="#record..record.Record.add_unique_to_dict">add_unique_to_dict</a></code></li>
+<li><code><a title="record..record.Record.integrate_list_to_dict" href="#record..record.Record.integrate_list_to_dict">integrate_list_to_dict</a></code></li>
+<li><code><a title="record..record.Record.remove_non_unique_from_list" href="#record..record.Record.remove_non_unique_from_list">remove_non_unique_from_list</a></code></li>
+<li><code><a title="record..record.Record.sort_tmp_list" href="#record..record.Record.sort_tmp_list">sort_tmp_list</a></code></li>
+<li><code><a title="record..record.Record.str_func_dict" href="#record..record.Record.str_func_dict">str_func_dict</a></code></li>
+<li><code><a title="record..record.Record.tpl_list" href="#record..record.Record.tpl_list">tpl_list</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.5.3</a>.</p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>
