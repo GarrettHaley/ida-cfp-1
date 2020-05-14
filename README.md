@@ -12,7 +12,7 @@ If you'd like to pull down the latest version of the dev codebase:
 git clone https://github.com/yafty/ida-cfp.git
 ```
 
-Or instead grab one of the releases located [here](https://github.com/yafty/ida-cfp/releases).
+Or instead grab one of the releases located [here](https://github.com/garretthaley/ida-cfp/releases).
 
 ## Dependencies and Prerequisites
 To function properly on your system the following packages, software, and configuration are required. Installation instructions for Ubuntu 16.04 LTS, Mac OSX High Sierra, and Windows 10 to follow.
