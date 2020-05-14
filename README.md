@@ -9,7 +9,7 @@ Standard pylint and Pep8 standards were strictly followed throughout the project
 If you'd like to pull down the latest version of the dev codebase:
 
 ```
-git clone https://github.com/yafty/ida-cfp.git
+git clone https://github.com/garretthaley/ida-cfp.git
 ```
 
 Or instead grab one of the releases located [here](https://github.com/garretthaley/ida-cfp/releases).
